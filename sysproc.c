@@ -99,6 +99,6 @@ int sys_proc_dump(void){
   if(argptr(0, (void*)&array_proc, sizeof(*array_proc)) < 0)
     return -1;
 
-  return sort_all_running_proccesses(array_proc, array_size);
+  return proc_dump(array_proc, array_size);
 }
 
