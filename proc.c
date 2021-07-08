@@ -541,11 +541,9 @@ int sort_all_running_proccesses(struct proc_info *array_proc, int array_size)
     array_proc[i].memsize = -1;
   }
 
-  struct ptable *ptable = proc_table();
   struct proc *p;
   p = ptable.proc;
   
-  int i = 0;
   for (i = 0; i < NPROC; ++i, ++p)
   {
     if (p->state == RUNNING || p->state == RUNNABLE){
