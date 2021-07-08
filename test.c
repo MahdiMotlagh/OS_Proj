@@ -23,7 +23,7 @@ int main(int argc, const char *argv[])
 
     sleep(100);
 
-    procs = malloc(sizeof(struct proc_info) * NPROC);
+    // procs = malloc(sizeof(struct proc_info) * NPROC);
     proc_dump(procs, pcount);
     printf(1, "pid\tsize\n");
 
