@@ -5,12 +5,10 @@
 
 int main(int argc, const char *argv[])
 {
-
     const int pcount = atoi(argv[1]);
-    int len;
     int pids[pcount];
     int i;
-    struct proc_info *procs = malloc(sizeof(struct proc_info) * NPROC);
+    struct proc_info *procs = malloc(sizeof(struct proc_info) * pcount);
 
     for (i = 0; i < pcount; ++i)
     {
@@ -26,10 +24,10 @@ int main(int argc, const char *argv[])
     sleep(100);
 
     procs = malloc(sizeof(struct proc_info) * NPROC);
-    proc_dump(procs, &len);
+    proc_dump(procs, pcount);
     printf(1, "pid\tsize\n");
 
-    for (i = 0; i < len; ++i)
+    for (i = 0; i < pcount; ++i)
         printf(1, "%d\t%d\n", procs[i].pid, procs[i].memsize);
 
     free(procs);
