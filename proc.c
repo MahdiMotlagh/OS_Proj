@@ -532,6 +532,9 @@ procdump(void)
     cprintf("\n");
   }
 }
+
+static int sort_all_running_proccesses(struct proc_info *array_proc, int array_size);
+
 int
 proc_dump(struct proc_info *array_proc, int array_size)
 {
