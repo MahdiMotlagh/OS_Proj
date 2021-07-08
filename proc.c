@@ -533,15 +533,14 @@ procdump(void)
   }
 }
 
-static int sort_all_running_proccesses(struct proc_info *array_proc, int array_size);
-
 int
 proc_dump(struct proc_info *array_proc, int array_size)
 {
-    return sort_all_running_proccesses(array_proc, array_size);
+    sort_all_running_proccesses(array_proc, array_size);
+    return 1;
 }
 
-int 
+void
 sort_all_running_proccesses(struct proc_info *array_proc, int array_size)
 {
   int i;
@@ -571,6 +570,4 @@ sort_all_running_proccesses(struct proc_info *array_proc, int array_size)
       }
     }
   }
-
-  return 1;
 }
