@@ -535,8 +535,8 @@ procdump(void)
 
 int sort_all_running_proccesses(struct proc_info *array_proc, int array_size)
 {
-  int i = 0;
-  for(; i < array_size; i++){
+  int i;
+  for(i = 0 ; i < array_size; i++){
     array_proc[i].pid = -1;
     array_proc[i].memsize = -1;
   }
