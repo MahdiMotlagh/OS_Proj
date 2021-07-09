@@ -6,6 +6,7 @@
 #include "memlayout.h"
 #include "mmu.h"
 #include "proc.h"
+#include "spinlock.h"
 
 int
 sys_fork(void)
@@ -99,6 +100,41 @@ int sys_proc_dump(void){
   if(argptr(0, (void*)&array_proc, sizeof(*array_proc)) < 0)
     return -1;
 
-  return proc_dump(array_proc, array_size);
+  sort_all_running_proccesses(array_proc, array_size);
+  return 1;
 }
 
+
+void sort_all_running_proccesses(struct proc_info *array_proc, int array_size)
+{
+  int i = 0;
+  for(; i < array_size; i++){
+    array_proc[i].pid = -1;
+    array_proc[i].memsize = -1;
+  }
+
+  struct ptable *myptable = proc_table();
+  struct proc *p;
+  p = myptable->proc;
+  acquire(&myptable->lock);
+  
+  int i = 0;
+  for (i = 0; i < NPROC; ++i, ++p)
+  {
+    if (p->state == RUNNING || p->state == RUNNABLE){
+      array_proc[i].pid = p->pid;
+	    array_proc[i].memsize = p->sz;
+    }
+  }
+
+  int j = 0;
+  for (i = 0; i < NPROC; i++){
+    for (j = i; j < NPROC; j++){
+      if(array_proc[i].memsize > array_proc[j].memsize){
+        struct proc_info tmp = array_proc[i];
+        array_proc[i] = array_proc[j];
+        array_proc[j] = tmp;
+      }
+    }
+  }
+}

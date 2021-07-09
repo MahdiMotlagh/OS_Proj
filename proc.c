@@ -7,10 +7,7 @@
 #include "proc.h"
 #include "spinlock.h"
 
-struct {
-  struct spinlock lock;
-  struct proc proc[NPROC];
-} ptable;
+struct ptable ptable;
 
 static struct proc *initproc;
 
@@ -533,41 +530,7 @@ procdump(void)
   }
 }
 
-int
-proc_dump(struct proc_info *array_proc, int array_size)
+struct ptable *proc_table()
 {
-    sort_all_running_proccesses(array_proc, array_size);
-    return 1;
-}
-
-void
-sort_all_running_proccesses(struct proc_info *array_proc, int array_size)
-{
-  int i;
-  for(i = 0 ; i < array_size; i++){
-    array_proc[i].pid = -1;
-    array_proc[i].memsize = -1;
-  }
-
-  struct proc *p;
-  p = ptable.proc;
-  
-  for (i = 0; i < NPROC; ++i, ++p)
-  {
-    if (p->state == RUNNING || p->state == RUNNABLE){
-      array_proc[i].pid = p->pid;
-	    array_proc[i].memsize = p->sz;
-    }
-  }
-
-  int j = 0;
-  for (i = 0; i < NPROC; i++){
-    for (j = i; j < NPROC; j++){
-      if(array_proc[i].memsize > array_proc[j].memsize){
-        struct proc_info tmp = array_proc[i];
-        array_proc[i] = array_proc[j];
-        array_proc[j] = tmp;
-      }
-    }
-  }
+  return &ptable;
 }
