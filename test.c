@@ -5,7 +5,6 @@
 #include "mmu.h"
 #include "memlayout.h"
 #include "param.h"
-#include "proc.h"
 
 int main(int argc, const char *argv[])
 {
