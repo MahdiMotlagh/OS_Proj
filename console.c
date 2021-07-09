@@ -14,6 +14,7 @@
 #include "mmu.h"
 #include "proc.h"
 #include "x86.h"
+#include "stdbool.h"
 
 static void consputc(int);
 
