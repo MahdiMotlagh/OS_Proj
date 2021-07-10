@@ -12,7 +12,6 @@ int main(int argc, const char *argv[])
 
     const int pcount = atoi(argv[1]);
     int len;
-    int pids[pcount];
     int i;
     struct proc_info *procs = NULL;
 
