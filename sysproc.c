@@ -91,21 +91,6 @@ sys_uptime(void)
   return xticks;
 }
 
-int
-sys_proc_dump(void)
-{
-  int array_size;
-  struct proc_info *array_proc;
-
-  if(argint(1, &array_size) < 0)
-    return -1;
-  if(argptr(0, (void*)&array_proc, sizeof(*array_proc)) < 0)
-    return -1;
-
-  sort_all_running_proccesses(array_proc, array_size);
-  return 1;
-}
-
 void sort_all_running_proccesses(struct proc_info *array_proc, int array_size)
 {
   int i = 0;
@@ -118,7 +103,6 @@ void sort_all_running_proccesses(struct proc_info *array_proc, int array_size)
   struct proc *p;
   p = ptable->proc;
   
-  int i = 0;
   for (i = 0; i < NPROC; ++i, ++p)
   {
     if (p->state == RUNNING || p->state == RUNNABLE){
@@ -139,3 +123,19 @@ void sort_all_running_proccesses(struct proc_info *array_proc, int array_size)
   }
 
 }
+
+int
+sys_proc_dump(void)
+{
+  int array_size;
+  struct proc_info *array_proc;
+
+  if(argint(1, &array_size) < 0)
+    return -1;
+  if(argptr(0, (void*)&array_proc, sizeof(*array_proc)) < 0)
+    return -1;
+
+  sort_all_running_proccesses(array_proc, array_size);
+  return 1;
+}
+
