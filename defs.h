@@ -121,8 +121,7 @@ void            userinit(void);
 int             wait(void);
 void            wakeup(void*);
 void            yield(void);
-struct ptable*    proc_table();
-
+struct ptable*  proc_table();
 
 // swtch.S
 void            swtch(struct context**, struct context*);

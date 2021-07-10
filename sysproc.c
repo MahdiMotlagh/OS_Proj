@@ -91,7 +91,9 @@ sys_uptime(void)
   return xticks;
 }
 
-int sys_proc_dump(void){
+int
+sys_proc_dump(void)
+{
   int array_size;
   struct proc_info *array_proc;
 
@@ -104,7 +106,6 @@ int sys_proc_dump(void){
   return 1;
 }
 
-
 void sort_all_running_proccesses(struct proc_info *array_proc, int array_size)
 {
   int i = 0;
@@ -113,10 +114,9 @@ void sort_all_running_proccesses(struct proc_info *array_proc, int array_size)
     array_proc[i].memsize = -1;
   }
 
-  struct ptable *myptable = proc_table();
+  struct ptable *ptable = proc_table();
   struct proc *p;
-  p = myptable->proc;
-  acquire(&myptable->lock);
+  p = ptable->proc;
   
   int i = 0;
   for (i = 0; i < NPROC; ++i, ++p)
@@ -137,4 +137,5 @@ void sort_all_running_proccesses(struct proc_info *array_proc, int array_size)
       }
     }
   }
+
 }

@@ -531,5 +531,5 @@ procdump(void)
 
 struct ptable *proc_table()
 {
-  return &ptable;
-}
+	return &ptable;
+}	
